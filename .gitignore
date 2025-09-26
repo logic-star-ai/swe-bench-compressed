@@ -1,0 +1,14 @@
+.vscode
+__pycache__
+venv
+.pytest_cache
+.cache
+
+bundle
+layout
+out
+logs
+
+grave/
+umoci/
+SWE-bench/

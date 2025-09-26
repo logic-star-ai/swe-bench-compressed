@@ -1,4 +1,12 @@
+---
+tags:
+- code
+---
 # SWE Bench Verified (Compressed)
+
+<picture>
+  <img src="./plot.png" alt="SWE-Bench Verified Total Image Size" style="width:100%">
+</picture>
 
 Setting up all the SWE-Bench Verified images used to take over 200 GiB of storage and 100+ GiB of transfer.
 
@@ -18,14 +26,14 @@ logicstar/sweb.eval.x86_64.<repo>_1776_<instance>
 
 ### Docker
 ```bash
-curl -L -#  https://huggingface.co/LogicStar/SWE-Bench-Verified-Compressed/resolve/main/saved.tar.zst?download=true | zstd -d --long=31 --stdout | docker load 
+curl -L -# https://huggingface.co/LogicStar/SWE-Bench-Verified-Compressed/resolve/main/saved.tar.zst?download=true | zstd -d --long=31 --stdout | docker load 
 ```
 
 ### Podman
 ⚠️ Podman cannot load docker-archives with manifests larger than 1 MiB.
 We split the archive into two parts:
 ```bash
-curl -L -#  https://huggingface.co/LogicStar/SWE-Bench-Verified-Compressed/resolve/main/saved.1.tar.zst?download=true | zstd -d --long=31 --stdout | podman load 
+curl -L -# https://huggingface.co/LogicStar/SWE-Bench-Verified-Compressed/resolve/main/saved.1.tar.zst?download=true | zstd -d --long=31 --stdout | podman load 
 curl -L -# https://huggingface.co/LogicStar/SWE-Bench-Verified-Compressed/resolve/main/saved.2.tar.zst?download=true | zstd -d --long=31 --stdout | podman load 
 ```
 
@@ -33,7 +41,8 @@ For faster downloads and parallelized loading, use the Hugging Face CLI to downl
 
 ```bash
 # Clone the repo and cd into it
-hf download ...
+hf download LogicStar/SWE-Bench-Verified-Compressed layout.tar.zst --local-dir .
+zstd -d --long=31 --stdout layout.tar.zst | tar -x -f -
 python3 load.py
 ```
 
