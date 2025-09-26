@@ -1,14 +1,20 @@
 # SWE Bench Verified (Compressed)
 
-Fed up by setting up all the SWE Bench Verified images? No more!
+Setting up all the SWE-Bench Verified images used to take over 200 GiB of storage and 100+ GiB of transfer.
 
-- ~~206~~ 31 GiB of total storage
-- ~~100~~ 5 GiB of network transfer
-- < 5min setup
+Now it’s just:
+- 31 GiB total storage (down from 206 GiB)
+- 5 GiB network transfer (down from 100 GiB)
+- ~ 5 minutes setup
 
-## Getting the Images
 
-The images will be named like this `logicstar/sweb.eval.x86_64.<repo>_1776_<instance>`.
+## 🚀 Getting the Images
+
+Images follow the naming convention:
+
+```
+logicstar/sweb.eval.x86_64.<repo>_1776_<instance>
+```
 
 ### Docker
 ```bash
@@ -16,13 +22,14 @@ curl -L -#  https://huggingface.co/LogicStar/SWE-Bench-Verified-Compressed/resol
 ```
 
 ### Podman
-For some reason Podman refuses to load `docker-archive`s with manifests larger than a MiB. We had to split it in two :(
+⚠️ Podman cannot load docker-archives with manifests larger than 1 MiB.
+We split the archive into two parts:
 ```bash
 curl -L -#  https://huggingface.co/LogicStar/SWE-Bench-Verified-Compressed/resolve/main/saved.1.tar.zst?download=true | zstd -d --long=31 --stdout | podman load 
 curl -L -# https://huggingface.co/LogicStar/SWE-Bench-Verified-Compressed/resolve/main/saved.2.tar.zst?download=true | zstd -d --long=31 --stdout | podman load 
 ```
 
-Need it even faster? Use hf cli for faster download and pull the images directly from the OCI layout in parallel:
+For faster downloads and parallelized loading, use the Hugging Face CLI to download the compressed OCI Layout and our load.py script to load the images in parallel:
 
 ```bash
 # Clone the repo and cd into it
@@ -30,9 +37,9 @@ hf download ...
 python3 load.py
 ```
 
-## Using the Images
+## 🛠 Using the Images
 
-To use our images just pass `--namespace logicstar` to the SWE Bench harness. For example:
+Just pass --namespace logicstar to the SWE-Bench harness. Example:
 
 ```bash
 python -m swebench.harness.run_evaluation \
