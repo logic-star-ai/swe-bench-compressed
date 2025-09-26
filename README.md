@@ -1,7 +1,3 @@
----
-tags:
-- code
----
 # SWE Bench Verified (Compressed)
 
 <picture>
