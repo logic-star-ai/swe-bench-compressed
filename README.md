@@ -48,6 +48,7 @@ Just pass --namespace logicstar to the SWE-Bench harness. Example:
 
 ```bash
 python -m swebench.harness.run_evaluation \
+    --dataset_name princeton-nlp/SWE-bench_Verified \
     --predictions_path gold \
     --max_workers 1 \
     --run_id validate-gold \
